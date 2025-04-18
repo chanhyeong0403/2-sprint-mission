@@ -1,27 +1,35 @@
 package com.sprint.mission.discodeit.entity;
 
+import com.sprint.mission.discodeit.entity.base.BaseEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
 
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.UUID;
+import lombok.NoArgsConstructor;
 
 @Getter
-public class BinaryContent implements Serializable {
+@Table(name = "binary_contents")
+@Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class BinaryContent extends BaseEntity {
 
-  private static final long serialVersionUID = 1L;
-  private UUID id;
-  private Instant createdAt;
-  //
+  @Column(nullable = false)
   private String fileName;
+
+  @Column(nullable = false)
   private Long size;
+
+  @Column(length = 100, nullable = false)
   private String contentType;
+
   private byte[] bytes;
 
   public BinaryContent(String fileName, Long size, String contentType, byte[] bytes) {
-    this.id = UUID.randomUUID();
-    this.createdAt = Instant.now();
-    //
     this.fileName = fileName;
     this.size = size;
     this.contentType = contentType;
