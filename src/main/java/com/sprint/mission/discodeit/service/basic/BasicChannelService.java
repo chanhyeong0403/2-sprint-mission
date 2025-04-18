@@ -95,6 +95,7 @@ public class BasicChannelService implements ChannelService {
     return channelMapper.toDto(channel);
   }
 
+  @Transactional
   @Override
   public void delete(UUID channelId) {
     if (!channelRepository.existsById(channelId)) {
